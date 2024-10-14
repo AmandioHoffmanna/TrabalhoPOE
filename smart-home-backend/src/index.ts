@@ -86,7 +86,7 @@ io.on('connection', (socket) => {
     });
 
     // Evento para mudar de canal
-    socket.on('mudarCanal', (canal) => {
+    socket.on('ajustarCanal', (canal) => {
         if (dispositivos.tvSalaOn && dispositivos.canais.includes(canal)) {
             dispositivos.canalAtual = canal; // Muda para o canal especificado
         }

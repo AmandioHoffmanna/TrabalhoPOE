@@ -9,7 +9,7 @@ interface EstadoDispositivos {
   luzCozinhaOn: boolean;
   luzQuartoOn: boolean;
   tvSalaOn: boolean;
-  canalTV: string | null;
+  canal: string | null;
   arCondicionadoOn: boolean;
   temperaturaArCondicionado: number;
   ventiladorOn: boolean;
@@ -30,7 +30,7 @@ const App: React.FC = () => {
     luzCozinhaOn: false,
     luzQuartoOn: false,
     tvSalaOn: false,
-    canalTV: null,
+    canal: null,
     arCondicionadoOn: false,
     temperaturaArCondicionado: 18,
     ventiladorOn: false,
@@ -81,7 +81,7 @@ const App: React.FC = () => {
   };
 
   const ajustarCanal = (canal: string) => {
-    socket.emit('mudarCanal', canal);
+    socket.emit('ajustarCanal', canal);
   };
 
   const controlarArCondicionado = () => {
@@ -151,7 +151,7 @@ const App: React.FC = () => {
           </button>
           {dispositivos.tvSalaOn && (
             <div className="tv-controles">
-              <p>Canal Atual: <strong>{dispositivos.canalTV}</strong></p>
+              <p>Canal Atual: <strong>{dispositivos.canal}</strong></p>
               <h4>Mudar Canal:</h4>
               {canaisDisponiveis.map(canal => (
                 <button key={canal} onClick={() => ajustarCanal(canal)}>
@@ -212,8 +212,8 @@ const App: React.FC = () => {
               <p>Temperatura Atual: <strong>{dispositivos.temperaturaGeladeira}°C</strong></p>
               <input
                 type="range"
-                min="1"
-                max="8"
+                min="-5"
+                max="3"
                 value={dispositivos.temperaturaGeladeira}
                 onChange={(e) => ajustarTemperaturaGeladeira(Number(e.target.value))}
               />
@@ -236,7 +236,7 @@ const App: React.FC = () => {
               <input
                 type="range"
                 min="1"
-                max="10"
+                max="5"
                 value={dispositivos.potenciaFogao}
                 onChange={(e) => ajustarPotenciaFogao(Number(e.target.value))}
               />
@@ -273,7 +273,7 @@ const App: React.FC = () => {
               <input
                 type="range"
                 min="1"
-                max="5"
+                max="3"
                 value={dispositivos.velocidadeVentilador}
                 onChange={(e) => ajustarVelocidadeVentilador(Number(e.target.value))}
               />
