@@ -1,0 +1,45 @@
+.casa {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.comodo {
+  margin-bottom: 20px;
+}
+
+.dispositivo {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 5px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+img {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin-top: 10px;
+}
+
+.ajustes {
+  margin-top: 10px;
+}
+
+.alerta {
+  color: red;
+  font-weight: bold;
+}
