@@ -59,7 +59,7 @@ const App: React.FC = () => {
         return dispositivos[key as keyof EstadoDispositivos] !== value;
       });
 
-      if (dispositivoAlterado) {
+      if (dispositivoAlterado) { // validação do popup
         setPopupMessage(`O ${dispositivoAlterado[0]} foi ${dispositivoAlterado[1] ? 'aceso' : 'apagado'}.`);
         setTimeout(() => {
           setPopupMessage(null);
@@ -219,9 +219,8 @@ const App: React.FC = () => {
                 value={dispositivos.temperaturaGeladeira}
                 onChange={(e) => {
                   const novaTemperatura = Number(e.target.value);
-                  ajustarTemperaturaGeladeira(novaTemperatura); // Atualiza a temperatura
+                  ajustarTemperaturaGeladeira(novaTemperatura); 
 
-                  // Verifica se a nova temperatura é 5 e exibe o alerta
                   if (novaTemperatura === 5) {
                     alert('Atenção! A temperatura está acima do definido (5°C).');
                   }

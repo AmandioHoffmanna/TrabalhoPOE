@@ -144,9 +144,9 @@ io.on('connection', (socket) => {
    
     socket.on('controlarCortinas', (acao) => {
         if (acao === 'abrir') {
-            dispositivos.cortinasAbertas = true; // Liga o ar-condicionado
+            dispositivos.cortinasAbertas = true; 
         } else if (acao === 'fechar') {
-            dispositivos.cortinasAbertas = false; // Desliga o ar-condicionado
+            dispositivos.cortinasAbertas = false; 
         }
         io.emit('estadoAltera', dispositivos);
     });
