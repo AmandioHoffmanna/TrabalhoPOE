@@ -6,11 +6,10 @@ import cors from 'cors';
 const app = express();
 app.use(cors());
 
-// Criar servidor http
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000", // URL do Front-End React
+        origin: "http://localhost:3000", 
         methods: ["GET", "POST"],
     }
 });
@@ -21,27 +20,26 @@ let dispositivos = {
     luzCozinhaOn: false,
     luzQuartoOn: false,
     arCondicionadoOn: false,
-    temperaturaArCondicionado: 18, // temperatura inicial
+    temperaturaArCondicionado: 18, 
     tvSalaOn: false,
-    canalAtual: null as string | null, // Permite que canalAtual seja string ou null
-    canais: ['Canal 1', 'Canal 2', 'Canal 3', 'Canal 4'], // Canais pré-definidos
-    geladeiraOn: false, // Geladeira inicialmente desligada
-    temperaturaGeladeira: 4, // Temperatura inicial da geladeira
+    canalAtual: null as string | null, 
+    canais: ['Canal 1', 'Canal 2', 'Canal 3', 'Canal 4', 'Canal 5'],
+    geladeiraOn: false, 
+    temperaturaGeladeira: 4, 
     fogaoOn: false,
     potenciaFogao: 1,
     ventiladorOn: false,
-    velocidadeVentilador: 1, // Velocidade inicial do Ventilador
+    velocidadeVentilador: 1,
     cortinasAbertas: false,
 };
 
-// Escuta os eventos de conexão do socket
+// eventos de conexão do socket
 io.on('connection', (socket) => {
     console.log('Cliente conectado', socket.id);
 
-    // Enviando o estado inicial dos dispositivos para o cliente
     socket.emit('estadoInicial', dispositivos);
 
-    // Manipulando os eventos e mudanças do estado dos dispositivos
+   
     socket.on('acenderLuz', () => {
         dispositivos.luzSalaOn = !dispositivos.luzSalaOn;
         io.emit('estadoAltera', dispositivos);
@@ -57,95 +55,93 @@ io.on('connection', (socket) => {
         io.emit('estadoAltera', dispositivos);
     });
 
-    // Evento para controlar o ar-condicionado
+    
     socket.on('controlarArCondicionado', (acao) => {
         if (acao === 'ligar') {
-            dispositivos.arCondicionadoOn = true; // Liga o ar-condicionado
+            dispositivos.arCondicionadoOn = true; 
         } else if (acao === 'desligar') {
-            dispositivos.arCondicionadoOn = false; // Desliga o ar-condicionado
+            dispositivos.arCondicionadoOn = false;
         }
         io.emit('estadoAltera', dispositivos);
     });
 
-    // Evento para ajustar a temperatura do ar-condicionado
+    
     socket.on('ajustarTemperaturaAr', (temperatura) => {
         dispositivos.temperaturaArCondicionado = temperatura;
         io.emit('estadoAltera', dispositivos);
     });
-
-    // Evento para controlar a TV
     socket.on('controlarTV', (acao) => {
         if (acao === 'ligar') {
-            dispositivos.tvSalaOn = true; // Liga a TV
-            dispositivos.canalAtual = dispositivos.canais[0]; // Liga no canal 1 por padrão
+            dispositivos.tvSalaOn = true; 
+            dispositivos.canalAtual = dispositivos.canais[0]; 
         } else if (acao === 'desligar') {
-            dispositivos.tvSalaOn = false; // Desliga a TV
-            dispositivos.canalAtual = null; // Reseta o canal
+            dispositivos.tvSalaOn = false; 
+            dispositivos.canalAtual = null; 
         }
         io.emit('estadoAltera', dispositivos);
     });
 
-    // Evento para mudar de canal
+    
     socket.on('ajustarCanal', (canal) => {
         if (dispositivos.tvSalaOn && dispositivos.canais.includes(canal)) {
-            dispositivos.canalAtual = canal; // Muda para o canal especificado
+            dispositivos.canalAtual = canal; 
         }
         io.emit('estadoAltera', dispositivos);
     });
 
-    // Evento para controlar o Fogão
+   
     socket.on('controlarFogao', (acao) => {
         if (acao === 'ligar') {
-            dispositivos.fogaoOn = true; // Liga o ar-condicionado
+            dispositivos.fogaoOn = true; 
         } else if (acao === 'desligar') {
-            dispositivos.fogaoOn = false; // Desliga o ar-condicionado
+            dispositivos.fogaoOn = false; 
         }
         io.emit('estadoAltera', dispositivos);
     });
-    // Evento para ajustar a potência do Fogão 
+    
     socket.on('ajustarPotenciaFogao', (potencia) => {
-        if (dispositivos.fogaoOn) { // Só permite ajuste se o Fogão estiver ligado
+        if (dispositivos.fogaoOn) {
             dispositivos.potenciaFogao = potencia;
             io.emit('estadoAltera', dispositivos);
         }
     });
 
-    // Evento para ajustar a temperatura da geladeira
+   
     socket.on('ajustarTemperaturaGeladeira', (temperatura) => {
-        if (dispositivos.geladeiraOn) { // Só permite ajuste se a geladeira estiver ligada
+        if (dispositivos.geladeiraOn) { 
             dispositivos.temperaturaGeladeira = temperatura;
             io.emit('estadoAltera', dispositivos);
         }
     });
 
-    // Evento para controlar a Geladeira
+    
     socket.on('controlarGeladeira', (acao) => {
         if (acao === 'ligar') {
-            dispositivos.geladeiraOn = true; // Liga a geladeira
+            dispositivos.geladeiraOn = true;
         } else if (acao === 'desligar') {
-            dispositivos.geladeiraOn = false; // Desliga a geladeira
+            dispositivos.geladeiraOn = false; 
         }
         io.emit('estadoAltera', dispositivos);
     });
 
-    // Evento para controlar o ventilador 
+    
     socket.on('controlarVentilador', (acao) => {
         if (acao === 'ligar') {
-            dispositivos.ventiladorOn = true; // Liga o ventilador
+            dispositivos.ventiladorOn = true; 
         } else if (acao === 'desligar') {
-            dispositivos.ventiladorOn = false; // Desliga o ventilador
+            dispositivos.ventiladorOn = false; 
         }
         io.emit('estadoAltera', dispositivos);
     });
-    // Evento para ajustar a velocidade do ventilador 
+    
     socket.on('ajustarVelocidadeVentilador', (velocidade) => {
-        if (dispositivos.ventiladorOn) { // Só permite ajuste se o ventilador estiver ligado
+        if (dispositivos.ventiladorOn) { 
             dispositivos.velocidadeVentilador = velocidade;
             io.emit('estadoAltera', dispositivos);
         }
     });
 
-    // Evento para controlar as cortinas
+   
     socket.on('controlarCortinas', (acao) => {
         if (acao === 'abrir') {
             dispositivos.cortinasAbertas = true; // Liga o ar-condicionado

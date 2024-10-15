@@ -6,108 +6,108 @@ body {
 .casa {
   font-family: Arial, sans-serif;
   padding: 20px;
-  max-width: 1200px; /* Limita a largura máxima da casa */
-  margin: 0 auto; /* Centraliza o conteúdo */
-  background-color: #ffffff; /* Fundo branco para a casa */
-  border-radius: 8px; /* Bordas arredondadas */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  max-width: 1200px; 
+  margin: 0 auto; 
+  background-color: #ffffff; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .comodo {
-  margin-bottom: 30px; /* Espaçamento maior entre os cômodos */
+  margin-bottom: 30px; 
 }
 
 .dispositivo {
-  margin: 15px 0; /* Espaçamento entre os dispositivos */
-  padding: 15px; /* Mais espaçamento interno */
+  margin: 15px 0;
+  padding: 15px; 
   border: 1px solid #ccc;
-  border-radius: 8px; /* Bordas arredondadas */
-  background-color: #f9f9f9; /* Fundo claro para dispositivos */
-  transition: background-color 0.3s; /* Transição suave */
+  border-radius: 8px;
+  background-color: #f9f9f9; 
+  transition: background-color 0.3s; 
 }
 
 .dispositivo:hover {
-  background-color: #f1f1f1; /* Efeito de hover */
+  background-color: #f1f1f1; 
 }
 
 button {
-  margin-top: 10px; /* Espaço maior acima dos botões */
-  padding: 12px 20px; /* Aumenta o padding dos botões */
+  margin-top: 10px; 
+  padding: 12px 20px;
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px; /* Aumenta o tamanho da fonte */
-  transition: background-color 0.3s; /* Transição suave */
+  font-size: 16px; 
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #45a049; /* Cor ao passar o mouse */
+  background-color: #45a049; 
 }
 
 img {
-  width: 100%; /* Imagens responsivas */
-  max-width: 100px; /* Limita a largura máxima */
+  width: 100%; 
+  max-width: 100px;
   height: auto;
   display: block;
   margin-top: 10px;
 }
 
 .ajustes {
-  margin-top: 15px; /* Aumenta o espaço acima dos ajustes */
+  margin-top: 15px;
 }
 
 .alerta {
   color: red;
   font-weight: bold;
-  margin-top: 10px; /* Adiciona margem ao alerta */
-  font-size: 16px; /* Aumenta o tamanho da fonte do alerta */
+  margin-top: 10px;
+  font-size: 16px; 
 }
 
-/* Estilo específico para a seção de cortinas */
+
 .cortinas {
-  margin: 15px 0; /* Espaçamento entre os dispositivos */
-  padding: 15px; /* Espaçamento interno */
-  border: 1px solid #ccc; /* Borda para a seção */
-  border-radius: 8px; /* Bordas arredondadas */
-  background-color: #f9f9f9; /* Fundo claro e neutro para as cortinas */
-  transition: background-color 0.3s; /* Transição suave ao passar o mouse */
+  margin: 15px 0;
+  padding: 15px; 
+  border: 1px solid #ccc;
+  border-radius: 8px; 
+  background-color: #f9f9f9;
+  transition: background-color 0.3s;
 }
 
 .cortinas:hover {
-  background-color: #f1f1f1; /* Efeito de hover semelhante ao dos outros dispositivos */
+  background-color: #f1f1f1; 
 }
 
 .cortinas h3 {
-  margin: 0; /* Remove margem do título */
+  margin: 0;
 }
 
 .cortinas img {
-  max-width: 80px; /* Limita a largura máxima da imagem das cortinas */
+  max-width: 80px;
 }
 
-/* Estilo específico para a seção de ventilador */
+
 .ventilador {
-  margin: 15px 0; /* Espaçamento entre os dispositivos */
-  padding: 15px; /* Espaçamento interno */
-  border: 1px solid #ccc; /* Borda para a seção */
-  border-radius: 8px; /* Bordas arredondadas */
-  background-color: #f9f9f9; /* Fundo claro e neutro para o ventilador */
-  transition: background-color 0.3s; /* Transição suave ao passar o mouse */
+  margin: 15px 0; 
+  padding: 15px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px;
+  background-color: #f9f9f9; 
+  transition: background-color 0.3s;
 }
 
 .ventilador:hover {
-  background-color: #f1f1f1; /* Efeito de hover semelhante ao dos outros dispositivos */
+  background-color: #f1f1f1;
 }
 
 @media (max-width: 600px) {
   .casa {
-    padding: 10px; /* Menos padding em telas menores */
+    padding: 10px; 
   }
 
   button {
-    width: 100%; /* Botões em tela cheia em dispositivos pequenos */
+    width: 100%; 
   }
 }
 

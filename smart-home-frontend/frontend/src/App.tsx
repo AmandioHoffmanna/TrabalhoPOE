@@ -17,6 +17,7 @@ interface EstadoDispositivos {
   fogaoOn: boolean;
   potenciaFogao: number;
   cortinasAbertas: boolean;
+  canalAtual: number;
   temperaturaGeladeira: number;
   alertaGeladeira: boolean;
   geladeiraOn: boolean;
@@ -37,13 +38,14 @@ const App: React.FC = () => {
     velocidadeVentilador: 1,
     fogaoOn: false,
     potenciaFogao: 1,
+    canalAtual: 1,
     cortinasAbertas: false,
     temperaturaGeladeira: 4,
     alertaGeladeira: false,
     geladeiraOn: false,
   });
 
-  const [popupMessage, setPopupMessage] = useState<string | null>(null); // Estado para o pop-up
+  const [popupMessage, setPopupMessage] = useState<string | null>(null);
 
   useEffect(() => {
     socket.on('estadoInicial', (estadoDispositivos: EstadoDispositivos) => {
@@ -151,7 +153,7 @@ const App: React.FC = () => {
           </button>
           {dispositivos.tvSalaOn && (
             <div className="tv-controles">
-              <p>Canal Atual: <strong>{dispositivos.canal}</strong></p>
+              <p>Canal Atual: <strong>{dispositivos.canalAtual}</strong></p>
               <h4>Mudar Canal:</h4>
               {canaisDisponiveis.map(canal => (
                 <button key={canal} onClick={() => ajustarCanal(canal)}>
@@ -213,16 +215,20 @@ const App: React.FC = () => {
               <input
                 type="range"
                 min="-5"
-                max="3"
+                max="5"
                 value={dispositivos.temperaturaGeladeira}
-                onChange={(e) => ajustarTemperaturaGeladeira(Number(e.target.value))}
+                onChange={(e) => {
+                  const novaTemperatura = Number(e.target.value);
+                  ajustarTemperaturaGeladeira(novaTemperatura); // Atualiza a temperatura
+
+                  // Verifica se a nova temperatura é 5 e exibe o alerta
+                  if (novaTemperatura === 5) {
+                    alert('Atenção! A temperatura está acima do definido (5°C).');
+                  }
+                }}
               />
             </div>
           )}
-          <img
-            src={dispositivos.geladeiraOn ? '/imgs/geladeira_on.png' : '/imgs/geladeira_off.png'}
-            alt="Geladeira"
-          />
         </div>
 
         <div className="dispositivo fogao">
@@ -296,8 +302,17 @@ const App: React.FC = () => {
           />
         </section>
       </section>
+
+      <footer>
+        <div>
+          <p>Desenvolvido por: Amandio Arnoldo Hoffmann e Vinícius da Veiga</p>
+        </div>
+      </footer>
     </div>
+
   );
 };
+
+
 
 export default App;
