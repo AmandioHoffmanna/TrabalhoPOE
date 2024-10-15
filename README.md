@@ -62,3 +62,9 @@ Instale as dependências do projeto:
 npm install socket.io-client
 Como você está utilizando TypeScript, é necessário instalar também as definições de tipo para o socket.io-client. Execute o seguinte comando:
 npm install @types/socket.io-client --save-dev
+
+
+-- Para rodar o programa.
+
+1 - Deve acessar a pasta smart-home-backend e inserir o comando 'npm start';
+2 - Deve abrir um novo terminal, acessar a pasta smart-home-frontend\frontend e inserir o comando 'npm start';
